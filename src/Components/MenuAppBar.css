@@ -1,0 +1,26 @@
+.drawer {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px) saturate(150%) grayscale(10%);
+  text-align: center;
+  top: 5rem;
+}
+.color {
+  height: 100vh;
+  background-color: #000000;
+  color: white;
+  padding-top: 5rem;
+  background-image: url('../images/sidebar.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center 20%;
+}
+.drawer-header {
+  color: rgb(255, 255, 255);
+  background-color: black;
+  padding: 1rem;
+  margin: 0;
+  height: 6rem;
+}
+.appBar {
+  margin-bottom: 500px;
+}

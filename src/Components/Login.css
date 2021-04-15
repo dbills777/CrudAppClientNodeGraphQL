@@ -1,0 +1,90 @@
+.container {
+  display: flex;
+  color: white;
+}
+.mail {
+  color: white;
+  text-align: center;
+}
+img {
+  width: 400px;
+}
+input::placeholder {
+  color: #5e5e5e;
+  font-size: 0.5rem;
+}
+.signup-form {
+  width: 20rem;
+  margin: 2rem auto;
+  max-width: 80%;
+  padding: 2rem;
+}
+
+.form-control label,
+.form-control input {
+  display: block;
+  width: 100%;
+  color: rgb(141, 141, 141);
+}
+
+.form-control input {
+  font: inherit;
+  padding: 0.1rem 0.25rem;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 1rem;
+}
+.form-control required {
+  color: red;
+}
+
+.form-control input:focus {
+  outline: none;
+  border-bottom-color: #ff2058;
+}
+
+.btn {
+  margin: 5px;
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #7ac9d7;
+  padding: 20px;
+  border-radius: 5px;
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  transition: all 0.4s ease 0s;
+  outline: none;
+}
+h1 {
+  color: white;
+}
+.MuiAvatar-root {
+  height: 250px;
+  width: 250px;
+  margin: 0 auto;
+  animation-name: stretch;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-fill-mode: none;
+  animation-play-state: running;
+}
+
+@keyframes stretch {
+  0% {
+    transform: scale(0.3);
+    background-color: #7ac9d7;
+    border-radius: 100%;
+  }
+  50% {
+    background-color: rgb(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.5);
+    background-color: #7ac9d7;
+  }
+}

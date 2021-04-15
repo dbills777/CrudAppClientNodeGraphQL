@@ -1,0 +1,37 @@
+// npx prisma migrate dev --name products-init
+// npx prisma studio
+generator client {
+
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// datasource db {
+//   provider = "sqlite"
+//   url      = "file:./dev.db"
+// }
+
+model Product {
+  id    Int     @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title String
+  price Float
+  description String
+  category String
+  image String?
+  categories Category[]
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  description String
+  product Product?    @relation(fields: [productId], references: [id])
+  productId  Int?
+}

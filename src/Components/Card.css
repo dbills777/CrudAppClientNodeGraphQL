@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+   color: rgba(195, 195, 195, 0.621)
+}
+/* {
+  "mappings": {
+    "dynamic": false,
+    "fields": {
+      "name": [
+        {
+          "foldDiacritics": false,
+          "maxGrams": 15,
+          "minGrams": 3,
+          "tokenization": "edgeGram",
+          "type": "autocomplete"
+        }
+      ],
+      "nickname": [
+        {
+          "foldDiacritics": false,
+          "maxGrams": 15,
+          "minGrams": 3,
+          "tokenization": "edgeGram",
+          "type": "autocomplete"
+        }
+      ]
+    }
+  }
+} */
