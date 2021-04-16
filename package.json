@@ -12,7 +12,7 @@
     "seed:product": "cd graphql-server && npm run seed:product",
     "build": "npm install && cd client && npm install && npm run build",
     "start-dev": "concurrently --kill-others \"nodemon index.js\" \"cd graphql-server && npm run dev\" \"cd client && npm start\"",
-    "start": "node index.js",
+    "start": "node app.js",
     "buildDocker": "docker build ."
   },
   "author": "Derrick Bills",

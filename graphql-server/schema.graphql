@@ -24,6 +24,7 @@ type Mutation {
   createCategory(data: CategoryCreateInput!, productTitle: String!): Category
   createProduct(data: ProductCreateInput!): Product!
   deleteProduct(id: Int!): Product
+  updateProduct(data: ProductCreateInput!, id: Int!): Product
 }
 
 type Product {
@@ -40,7 +41,6 @@ input ProductCreateInput {
   category: String!
   description: String!
   image: String!
-  name: String
   price: Float!
   title: String!
 }

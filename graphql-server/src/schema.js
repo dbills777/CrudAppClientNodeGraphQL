@@ -121,7 +121,7 @@ const Mutation = objectType({
               description: args.data.description,
               category: args.data.category,
               image: args.data.image,
-              
+
             },
           })
         },
@@ -176,22 +176,29 @@ const Mutation = objectType({
     //   },
     // })
 
-    //   t.field('incrementPostViewCount', {
-    //     type: 'Post',
-    //     args: {
-    //       id: nonNull(intArg()),
-    //     },
-    //     resolve: (_, args, context) => {
-    //       return context.prisma.post.update({
-    //         where: { id: args.id || undefined },
-    //         data: {
-    //           viewCount: {
-    //             increment: 1,
-    //           },
-    //         },
-    //       })
-    //     },
-    //   })
+      t.field('updateProduct', {
+        type: 'Product',
+        args: {
+          id: nonNull(intArg()),
+          data: nonNull(
+            arg({
+              type: 'ProductCreateInput',
+            }),
+          ),
+        },
+        resolve: (_, args, context) => {
+          return context.prisma.product.update({
+            where: { id: args.id || undefined },
+            data: {
+              title: args.data.title,
+              price: args.data.price,
+              description: args.data.description,
+              category: args.data.category,
+              image: args.data.image,
+            },
+          })
+        },
+      })
 
       t.field('deleteProduct', {
         type: 'Product',
@@ -285,7 +292,6 @@ const ProductCreateInput = inputObjectType({
     t.nonNull.string('description')
     t.nonNull.string('category')
     t.nonNull.string('image')
-    t.string('name')
   },
 })
 

@@ -121,19 +121,10 @@ export default function PrimarySearchAppBar({ getQuery, props }) {
         }}
       >
         <Toolbar className={classes.appBar}>
-          <IconButton
-            edge='start'
-            color='inherit'
-            aria-label='menu'
-            onClick={handleDrawerToggle}
-          >
+          <IconButton edge='start' color='inherit' aria-label='menu' onClick={handleDrawerToggle}>
             <MenuIcon />
           </IconButton>
-          <Drawer
-            open={drawerOpen}
-            onClose={handleDrawerToggle}
-            className='drawer'
-          >
+          <Drawer open={drawerOpen} onClose={handleDrawerToggle} className='drawer'>
             <h3 className='drawer-header'>Breaking Bad Application</h3>
             <Divider />
             <List className='color'>
@@ -182,6 +173,20 @@ export default function PrimarySearchAppBar({ getQuery, props }) {
                       Episodes
                     </NavLink>
                   </ListItem>
+                  <ListItem>
+                    <NavLink
+                      to='/products'
+                      className={classes.navLinks}
+                      onClick={handleDrawerToggle}
+                      style={{
+                        display: 'block',
+                        textAlign: 'center',
+                        width: '100%',
+                      }}
+                    >
+                      Products
+                    </NavLink>
+                  </ListItem>
                 </>
               ) : (
                 <ListItem
@@ -199,28 +204,18 @@ export default function PrimarySearchAppBar({ getQuery, props }) {
           {!authContext.isAuth && !isAuthenticated ? (
             <>
               <div>
-                <NavLink
-                  className={classes.notActive}
-                  to='#'
-                  onClick={alertMessage}
-                >
+                <NavLink className={classes.notActive} to='#' onClick={alertMessage}>
                   Characters
                 </NavLink>
-                <NavLink
-                  className={classes.notActive}
-                  to='#'
-                  onClick={alertMessage}
-                >
+                <NavLink className={classes.notActive} to='#' onClick={alertMessage}>
                   Quotes
                 </NavLink>
-                <NavLink
-                  className={classes.notActive}
-                  to='#'
-                  onClick={alertMessage}
-                >
+                <NavLink className={classes.notActive} to='#' onClick={alertMessage}>
                   Episodes
                 </NavLink>
-
+                <NavLink className={classes.notActive} to='#' onClick={alertMessage}>
+                  Products
+                </NavLink>
               </div>
             </>
           ) : (
@@ -234,7 +229,9 @@ export default function PrimarySearchAppBar({ getQuery, props }) {
               <NavLink className={classes.navLinks} to='/episodes'>
                 Episodes Table
               </NavLink>
-              
+              <NavLink className={classes.navLinks} to='/products'>
+                Products
+              </NavLink>
             </div>
           )}
 
@@ -266,12 +263,7 @@ export default function PrimarySearchAppBar({ getQuery, props }) {
               <>
                 <p>
                   <AuthLogoutTest onClick={() => isAuthenticated.logout()} />
-                  {user.name}{' '}
-                  <img
-                    className={'profile-pic'}
-                    src={user.picture}
-                    alt={user.name}
-                  ></img>{' '}
+                  {user.name} <img className={'profile-pic'} src={user.picture} alt={user.name}></img>{' '}
                 </p>
               </>
             )}
@@ -291,9 +283,7 @@ export default function PrimarySearchAppBar({ getQuery, props }) {
                 </Button>
                 <img
                   className={'profile-pic'}
-                  src={
-                    'https://www.pngitem.com/pimgs/m/79-797310_breaking-bad-heisenberg-logo-hd-png-download.png'
-                  }
+                  src={'https://www.pngitem.com/pimgs/m/79-797310_breaking-bad-heisenberg-logo-hd-png-download.png'}
                   alt={'alt'}
                 ></img>
               </>

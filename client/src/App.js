@@ -4,6 +4,7 @@ import MenuAppBar from './Components/MenuAppBar';
 import Quotes from './Components/Quote';
 import Episodes from './Components/Episodes';
 import CardUser from './Components/CardUser';
+import ProductList from './Components/ProductList';
 import LoginFullScreen from './Components/LoginFullScreen';
 import { Switch, Route } from 'react-router-dom';
 import { CharacterContextProvider } from './contexts/CharacterContext';
@@ -28,6 +29,7 @@ const App = () => {
                   <Route path='/quotes' component={Quotes} />
                   <Route path='/episodes' component={Episodes} />
                   <Route path='/characters' component={CardUser} />
+                  <Route path='/products' component={ProductList} />
                   <Route path='/login' component={LoginFullScreen} />
                   <Route path='/' component={LoginFullScreen} />
                 </Switch>
