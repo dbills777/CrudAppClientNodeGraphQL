@@ -30,10 +30,10 @@ type Mutation {
 type Product {
   categories: [Category!]!
   category: String
-  description: String!
+  description: String
   id: Int!
   image: String
-  price: String!
+  price: String
   title: String!
 }
 
@@ -41,7 +41,7 @@ input ProductCreateInput {
   category: String!
   description: String!
   image: String!
-  price: Float!
+  price: String!
   title: String!
 }
 

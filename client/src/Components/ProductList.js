@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useQuery, gql } from '@apollo/client';
+// import axios from 'axios';
+import { useQuery, gql, useMutation } from '@apollo/client';
 import {
   Container,
   makeStyles,
@@ -23,8 +23,6 @@ import {
 import SearchIcon from '@material-ui/icons/Search';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -67,41 +65,97 @@ const ALL_PRODUCTS = gql`
     }
   }
 `;
+const UPDATE_PRODUCT = gql`
+  mutation updateProduct(
+    $id: Int!
+    $title: String!
+    $price: String
+    $description: String
+    $category: String
+    $image: String
+  ) {
+    updateProduct(
+      id: $id
+      data: { title: $title, price: $price, description: $description, category: $category, image: $image }
+    ) {
+      id
+    }
+  }
+`;
+const DELETE_PRODUCT = gql`
+  mutation deleteProduct($id: Int!) {
+    deleteProduct(id: $id) {
+      id
+    }
+  }
+`;
 
 const ProductList = () => {
   const classes = useStyles();
-  const [selectedProduct, setselectedProduct] = useState({ title: '' });
+  const [selectedProduct, setSelectedProduct] = useState({ title: '' });
+  const [title, setTitle] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [image, setImage] = useState('');
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const { loading, error, data } = useQuery(ALL_PRODUCTS);
+  const [updateProduct] = useMutation(UPDATE_PRODUCT);
+  const [deleteProduct] = useMutation(DELETE_PRODUCT);
+  // console.log(productList);
 
-  const { data } = useQuery(ALL_PRODUCTS);
-  //   const {  data } = useQuery(ALL_CATEGORIES);
-  const productList = data.allProducts;
-  console.log(productList);
-
-  const handleDelete = async (product) => {
-    setselectedProduct(product.product);
+  const handleDelete = async () => {
     setDeleteOpen(false);
+    console.log(selectedProduct.id);
+    try {
+      deleteProduct({ variables: { id: selectedProduct.id } });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleClickEditOpen = (product) => {
-    setselectedProduct(product.product);
+    console.log(product);
+    setSelectedProduct(product.product);
     setEditOpen(true);
   };
   const handleClickDeleteOpen = (product) => {
-    setselectedProduct(product.title);
+    setSelectedProduct(product.product);
     setDeleteOpen(true);
   };
   const handleCloseEdit = () => {
     setEditOpen(false);
   };
-
-  const handleUpdate = async (values) => {
+  const handleUpdate = async () => {
+    console.log('hit handle update', title, description, );
+    updateProduct({
+      variables: {
+        id: selectedProduct.id,
+        title: title,
+        description: description,
+        price: price,
+        category: category,
+        image: image,
+      },
+    });
   };
 
   const handleCloseDelete = () => {
     setDeleteOpen(false);
   };
+  if (loading) {
+    return (
+      <Container className={classes.root}>
+        <Typography className={classes.messages}>Loading...</Typography>
+      </Container>
+    );
+  }
+
+  if (error) {
+    return <Typography className={classes.messages}>{`${error.message}`}</Typography>;
+  }
+  const productList = data.allProducts;
 
   return (
     <>
@@ -165,122 +219,81 @@ const ProductList = () => {
         onClose={handleCloseEdit}
         aria-labelledby='edit-dialog-title'
       >
-        <Formik
-          initialValues={{
-            title: selectedProduct?.title,
-            price: selectedProduct?.price,
-            description: selectedProduct?.description,
-            category: selectedProduct?.category,
-            image: selectedProduct?.image,
-          }}
-          validationSchema={Yup.object().shape({
-            title: Yup.string('Enter product title.').required('Title is Required'),
-            price: Yup.number('product price number').required('Price is Required'),
-            description: Yup.string('product description').required('Description is Required'),
-            category: Yup.string('product category').required('Category is Required'),
-            image: Yup.string('product image').required('Image is Required'),
-          })}
-          onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
-            try {
-              await handleUpdate(values);
-              handleCloseEdit();
-            } catch (err) {
-              console.error(err);
-              setStatus({ success: false });
-              setErrors({ submit: err.message });
-              setSubmitting(false);
-            }
-          }}
-        >
-          {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
-            <form noValidate autoComplete='off' onSubmit={handleSubmit} className={classes.dialogContent}>
-              <DialogTitle id='edit-dialog-title'>Product Edit Form</DialogTitle>
-              <DialogContent>
-                <DialogContentText>Edit A products Details And Save the Changes</DialogContentText>
+            <DialogTitle id='edit-dialog-title'>Product Edit Form</DialogTitle>
+            <DialogContent>
+              <DialogContentText>Edit A products Details And Save the Changes</DialogContentText>
+              <TextField
+                autoFocus
+                id='title'
+                name='title'
+                label='Product Title'
+                type='text'
+                fullWidth
+                placeholder={selectedProduct.title}
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+              />
+              <Box className={classes.content}>
                 <TextField
                   autoFocus
-                  id='title'
-                  name='title'
-                  label='Product Title'
+                  id='price'
+                  name='price'
+                  label='Enter Price Here'
                   type='text'
-                  fullWidth
-                  placeholder={values.title}
-                  value={values.title}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={Boolean(touched.title && errors.title)}
-                  helperText={touched.title && errors.title}
+                  onChange={(e) => {
+                    setPrice(e.target.value);
+                  }}
                 />
-                <Box className={classes.content}>
-                  <TextField
-                    autoFocus
-                    id='price'
-                    name='price'
-                    label='price'
-                    type='number'
-                    value={values.price}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={Boolean(touched.price && errors.price)}
-                    helperText={touched.price && errors.price}
-                  />
-                </Box>
-                <Box>
-                  <TextField
-                    autoFocus
-                    name='category'
-                    id='category'
-                    label='category'
-                    type='text'
-                    value={values.category}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={Boolean(touched.category && errors.category)}
-                    helperText={touched.category && errors.category}
-                  />
-                </Box>
-                <Box>
-                  <TextField
-                    autoFocus
-                    id='description'
-                    name='description'
-                    label='product Description'
-                    type='textarea'
-                    fullWidth
-                    value={values.description}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={Boolean(touched.description && errors.description)}
-                    helperText={touched.description && errors.description}
-                  />
-                </Box>
-                <Box>
-                  <TextField
-                    autoFocus
-                    id='image'
-                    name='image'
-                    label='product image'
-                    type='textarea'
-                    fullWidth
-                    value={values.image}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={Boolean(touched.image && errors.image)}
-                    helperText={touched.image && errors.image}
-                  />
-                </Box>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleCloseEdit} color='primary'>
-                  Cancel
-                </Button>
-                <Button type='submit' color='primary'>
-                  Save
-                </Button>
-              </DialogActions>
-            </form>
-          )}
-        </Formik>
+              </Box>
+              <Box>
+                <TextField
+                  autoFocus
+                  name='price'
+                  id='category'
+                  label='Enter Category Here'
+                  type='text'
+                  // value={selectedProduct.category}
+                  onChange={(e) => {
+                    setCategory(e.target.value);
+                  }}
+                />
+              </Box>
+              <Box>
+                <TextField
+                  autoFocus
+                  id='description'
+                  name='description'
+                  label='product Description'
+                  type='textarea'
+                  fullWidth
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                  }}
+                />
+              </Box>
+              <Box>
+                <TextField
+                  autoFocus
+                  id='image'
+                  name='image'
+                  label='Enter Image URL'
+                  type='textarea'
+                  fullWidth
+                  onChange={(e) => {
+                    setImage(e.target.value);
+                  }}
+                />
+              </Box>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseEdit} color='primary'>
+                Cancel
+              </Button>
+              <Button type='submit' color='primary' onClick={handleUpdate}>
+                Save
+              </Button>
+            </DialogActions>
       </Dialog>
       <Dialog open={deleteOpen} onClose={handleCloseDelete}>
         <DialogTitle>Delete Product</DialogTitle>

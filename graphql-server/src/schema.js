@@ -219,8 +219,8 @@ const Product = objectType({
   definition(t) {
     t.nonNull.int('id')
     t.nonNull.string('title')
-    t.nonNull.string('price')
-    t.nonNull.string('description')
+    t.string('price')
+    t.string('description')
     t.string('category')
     t.string('image')
     t.nonNull.list.nonNull.field('categories', {
@@ -288,7 +288,7 @@ const ProductCreateInput = inputObjectType({
   name: 'ProductCreateInput',
   definition(t) {
     t.nonNull.string('title')
-    t.nonNull.float('price')
+    t.nonNull.string('price')
     t.nonNull.string('description')
     t.nonNull.string('category')
     t.nonNull.string('image')

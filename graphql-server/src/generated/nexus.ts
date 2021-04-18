@@ -36,7 +36,7 @@ export interface NexusGenInputs {
     category: string; // String!
     description: string; // String!
     image: string; // String!
-    price: number; // Float!
+    price: string; // String!
     title: string; // String!
   }
 }
@@ -63,10 +63,10 @@ export interface NexusGenObjects {
   Mutation: {};
   Product: { // root type
     category?: string | null; // String
-    description: string; // String!
+    description?: string | null; // String
     id: number; // Int!
     image?: string | null; // String
-    price: string; // String!
+    price?: string | null; // String
     title: string; // String!
   }
   Query: {};
@@ -99,10 +99,10 @@ export interface NexusGenFieldTypes {
   Product: { // field return type
     categories: NexusGenRootTypes['Category'][]; // [Category!]!
     category: string | null; // String
-    description: string; // String!
+    description: string | null; // String
     id: number; // Int!
     image: string | null; // String
-    price: string; // String!
+    price: string | null; // String
     title: string; // String!
   }
   Query: { // field return type
