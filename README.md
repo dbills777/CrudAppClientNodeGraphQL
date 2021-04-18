@@ -1,10 +1,17 @@
 # GraphQL API Node Server
+[ProductList.js](https://github.com/dbills777/CrudAppClientNodeGraphQL/blob/main/client/src/Components/ProductList.js)
 
 ## Prisma as your data modeling tool
+[Prisma Folder-> migrations: seed: shchema: ](https://github.com/dbills777/CrudAppClientNodeGraphQL/blob/main/client/src/Components/ProductList.js)
+<br>
+
+[Full schema.js](https://github.com/dbills777/CrudAppClientNodeGraphQL/blob/main/graphql-server/src/schema.js)
 
 ## Docker-based PostgreSQL or MySQL as your data store
+  - PostgreSQL
 
 ## At least 3 Query resolvers allowing users to get data from your server
+1
 ```javascript
 // Loads on page Load
 query allProducts {
@@ -18,6 +25,7 @@ query allProducts {
   }
 }
 ```
+2
 ```javascript
 // Loads on page load and fills select list with categories in db
 query allCategories{
@@ -26,6 +34,7 @@ query allCategories{
   }
 }
 ```
+3
 ```javascript
 // not implementated in front end
 query prodByID{
@@ -39,6 +48,7 @@ query prodByID{
   }
 }
 ```
+4
 ```javascript
 // not implemented in front end
 query catByID{
@@ -53,6 +63,7 @@ query catByID{
 ```
 
 ## At least 2 Mutation resolvers allowing users to create, update, or upsert an item.
+1
 ```javascript
 // clicking edit and submitting the form updates a products details in db
     mutation updateProduct{
@@ -72,6 +83,7 @@ query catByID{
     }
   }
   ```
+ 2
   ```javascript
   // clicking add product button brings up page for adding a new product to db
   mutation createProduct{
@@ -94,6 +106,7 @@ query catByID{
 }
 ```
 ## At least 1 Mutation resolver allowing users to delete an item.
+1
 ```javascript
 // clicking delete button deletes a product from the db
   mutation deleteProduct{
@@ -108,8 +121,10 @@ query catByID{
 - Preloaded with >= 25 items
 
 ## Your app will be deployable locally using Docker and will have seed data entered into the datastore.
-//todo
+ - todo deployment
+ - datastore loaded
 
 ## All of your source code will be properly uploaded to GitHub
+-properly uploaded to GitHub
 
 ## Your ReadMe file will accurately describe your server install and run process and how to use the APIs
