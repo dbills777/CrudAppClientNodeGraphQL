@@ -9,7 +9,6 @@ import {
   CardMedia,
   CardActions,
   CardContent,
-  Input,
   IconButton,
   Box,
   Dialog,
@@ -17,12 +16,22 @@ import {
   DialogContent,
   DialogContentText,
   TextField,
+  ListItem,
+  List,
+  Slide,
   DialogActions,
+  AppBar,
+  Toolbar,
   Button,
+  Divider,
 } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
+import CloseIcon from '@material-ui/icons/Close';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction='up' ref={ref} {...props} />;
+});
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -91,23 +100,21 @@ const CREATE_CATEGORY = gql`
     }
   }
 `;
-// const CREATE_PRODUCT = gql`
-//   mutation createProduct(
-//     $id: Int!
-//     $title: String!
-//     $price: String
-//     $description: String
-//     $category: String
-//     $image: String
-//   ) {
-//     updateProduct(
-//       id: $id
-//       data: { title: $title, price: $price, description: $description, category: $category, image: $image }
-//     ) {
-//       id
-//     }
-//   }
-// `;
+const CREATE_PRODUCT = gql`
+  mutation createProduct(
+    $title: String!
+    $price: String!
+    $description: String!
+    $category: String!
+    $image: String!
+  ) {
+    createProduct(
+      data: { title: $title, price: $price, description: $description, category: $category, image: $image }
+    ) {
+      id
+    }
+  }
+`;
 const DELETE_PRODUCT = gql`
   mutation deleteProduct($id: Int!) {
     deleteProduct(id: $id) {
@@ -126,10 +133,12 @@ const ProductList = () => {
   const [image, setImage] = useState('');
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const { loading, error, data } = useQuery(ALL_PRODUCTS);
   const [updateProduct] = useMutation(UPDATE_PRODUCT);
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
   const [createCategory] = useMutation(CREATE_CATEGORY);
+  const [createProduct] = useMutation(CREATE_PRODUCT);
   // const [createProduct] = useMutation(CREATE_PRODUCT);
   // console.log(productList);
   const handleDelete = async () => {
@@ -141,7 +150,9 @@ const ProductList = () => {
       console.error(err);
     }
   };
-
+ const handleClickOpen = () => {
+   setOpen(true);
+ };
   const handleClickEditOpen = (product) => {
     console.log(product);
     setSelectedProduct(product.product);
@@ -151,6 +162,12 @@ const ProductList = () => {
     setSelectedProduct(product.product);
     setDeleteOpen(true);
   };
+  // Add a new Product section
+   const handleClose = async () => {
+     setOpen(false);
+   };
+
+    //  end Add a new Product Section.
   const handleCloseEdit = () => {
     setEditOpen(false);
   };
@@ -174,6 +191,20 @@ const ProductList = () => {
         description: category,
       }
     })
+  };
+  const handleAddProduct = async () => {
+    console.log('hit handle update', title, description,price, category, image );
+    setOpen(false);
+    createProduct({
+      variables: {
+        title: title,
+        price: price,
+        description: description,
+        category: category,
+        image: image,
+      },
+    });
+
   };
 
   const handleCloseDelete = () => {
@@ -204,18 +235,20 @@ const filteredArr = categoryList.reduce((acc, current) => {
 console.log(filteredArr)
   return (
     <>
-      <form>
-        <Input placeholder='Search' />
-        <IconButton aria-label='search'>
-          <SearchIcon />
+      <div>
+        <IconButton onClick={handleClickOpen} aria-label='add-character'>
+          <AddCircleIcon />
+          <h1>+Add Product</h1>
         </IconButton>
-      </form>
-      <label for='categories'>Find By Category:</label>
-      <select name='categories' id='cars'>
-        {filteredArr.map((category) => {
-          return <option value ={category.description}>{category.description}</option>;
-        })}
-      </select>
+      </div>
+      <div>
+        <label for='categories'>Find By Category:</label>
+        <select name='categories' id='cars'>
+          {filteredArr.map((category) => {
+            return <option value={category.description}>{category.description}</option>;
+          })}
+        </select>
+      </div>
       <Container className={classes.root}>
         {productList.map((product) => {
           return (
@@ -362,6 +395,103 @@ console.log(filteredArr)
           </Button>
         </DialogActions>
       </Dialog>
+      {/* post diaglog screen */}
+      <div>
+        <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+          <AppBar className={classes.appBar}>
+            <Toolbar>
+              <IconButton edge='start' color='inherit' onClick={handleClose} aria-label='close'>
+                <CloseIcon />
+              </IconButton>
+              <Typography variant='h6' className={classes.title2}>
+                Add A New Product
+              </Typography>
+              <Button autoFocus color='inherit' onClick={() => handleAddProduct()}>
+                save
+              </Button>
+            </Toolbar>
+          </AppBar>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <List>
+            <ListItem button>
+              <TextField
+                autoFocus
+                required
+                autoComplete='off'
+                margin='dense'
+                id='title'
+                label='Product Title'
+                type='text'
+                fullWidth
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+              />
+            </ListItem>
+            <ListItem button>
+              <TextField
+                required
+                autoComplete='off'
+                margin='dense'
+                id='price'
+                label='Price'
+                type='text'
+                fullWidth
+                onChange={(e) => {
+                  setPrice(e.target.value);
+                }}
+              />
+            </ListItem>
+            <ListItem button>
+              <TextField
+                required
+                autoComplete='off'
+                margin='dense'
+                id='category'
+                label='category'
+                type='Text'
+                fullWidth
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                }}
+              />
+            </ListItem>
+            <ListItem button>
+              <TextField
+                required
+                autoComplete='off'
+                margin='dense'
+                id='description'
+                label='description'
+                type='Text'
+                fullWidth
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+              />
+            </ListItem>
+            <ListItem button>
+              <TextField
+                required
+                autoComplete='off'
+                margin='dense'
+                id='image'
+                label='imageURL'
+                type='Text'
+                fullWidth
+                onChange={(e) => {
+                  setImage(e.target.value);
+                }}
+              />
+            </ListItem>
+
+            <Divider />
+          </List>
+        </Dialog>
+      </div>
     </>
   );
 };
