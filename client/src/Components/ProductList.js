@@ -66,22 +66,30 @@ const ALL_PRODUCTS = gql`
   }
 `;
 const UPDATE_PRODUCT = gql`
-  mutation updateProduct(
-    $id: Int!
-    $title: String!
-    $price: String
-    $description: String
-    $category: String
-    $image: String
-  ) {
-    updateProduct(
-      id: $id
-      data: { title: $title, price: $price, description: $description, category: $category, image: $image }
+  mutation updateProduct($id: Int!,$title: String!,$price: String!,$description: String!,$category: String!,$image: String!) {
+    updateProduct (id: $id, data: { title: $title, price: $price, description: $description, category: $category, image: $image }
     ) {
       id
     }
   }
 `;
+// const CREATE_PRODUCT = gql`
+//   mutation createProduct(
+//     $id: Int!
+//     $title: String!
+//     $price: String
+//     $description: String
+//     $category: String
+//     $image: String
+//   ) {
+//     updateProduct(
+//       id: $id
+//       data: { title: $title, price: $price, description: $description, category: $category, image: $image }
+//     ) {
+//       id
+//     }
+//   }
+// `;
 const DELETE_PRODUCT = gql`
   mutation deleteProduct($id: Int!) {
     deleteProduct(id: $id) {
@@ -103,6 +111,7 @@ const ProductList = () => {
   const { loading, error, data } = useQuery(ALL_PRODUCTS);
   const [updateProduct] = useMutation(UPDATE_PRODUCT);
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
+  // const [createProduct] = useMutation(CREATE_PRODUCT);
   // console.log(productList);
 
   const handleDelete = async () => {
@@ -128,7 +137,9 @@ const ProductList = () => {
     setEditOpen(false);
   };
   const handleUpdate = async () => {
-    console.log('hit handle update', title, description, );
+    console.log('hit handle update', title, description,price, category, image );
+    setEditOpen(false);
+
     updateProduct({
       variables: {
         id: selectedProduct.id,
@@ -211,90 +222,92 @@ const ProductList = () => {
           );
         })}
       </Container>
-      <Dialog
-        fullWidth
-        maxWidth='lg'
-        open={editOpen}
-        className={classes.dialog}
-        onClose={handleCloseEdit}
-        aria-labelledby='edit-dialog-title'
-      >
-            <DialogTitle id='edit-dialog-title'>Product Edit Form</DialogTitle>
-            <DialogContent>
-              <DialogContentText>Edit A products Details And Save the Changes</DialogContentText>
+      <form>
+        <Dialog
+          fullWidth
+          maxWidth='lg'
+          open={editOpen}
+          className={classes.dialog}
+          onClose={handleCloseEdit}
+          aria-labelledby='edit-dialog-title'
+        >
+          <DialogTitle id='edit-dialog-title'>Product Edit Form</DialogTitle>
+          <DialogContent>
+            <DialogContentText>Edit A products Details And Save the Changes</DialogContentText>
+            <TextField
+              autoFocus
+              id='title'
+              name='title'
+              label='Product Title'
+              type='text'
+              fullWidth
+              placeholder={selectedProduct.title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+            />
+            <Box className={classes.content}>
               <TextField
                 autoFocus
-                id='title'
-                name='title'
-                label='Product Title'
+                id='price'
+                name='price'
+                label='Enter Price Here'
                 type='text'
-                fullWidth
-                placeholder={selectedProduct.title}
                 onChange={(e) => {
-                  setTitle(e.target.value);
+                  setPrice(e.target.value);
                 }}
               />
-              <Box className={classes.content}>
-                <TextField
-                  autoFocus
-                  id='price'
-                  name='price'
-                  label='Enter Price Here'
-                  type='text'
-                  onChange={(e) => {
-                    setPrice(e.target.value);
-                  }}
-                />
-              </Box>
-              <Box>
-                <TextField
-                  autoFocus
-                  name='price'
-                  id='category'
-                  label='Enter Category Here'
-                  type='text'
-                  // value={selectedProduct.category}
-                  onChange={(e) => {
-                    setCategory(e.target.value);
-                  }}
-                />
-              </Box>
-              <Box>
-                <TextField
-                  autoFocus
-                  id='description'
-                  name='description'
-                  label='product Description'
-                  type='textarea'
-                  fullWidth
-                  onChange={(e) => {
-                    setDescription(e.target.value);
-                  }}
-                />
-              </Box>
-              <Box>
-                <TextField
-                  autoFocus
-                  id='image'
-                  name='image'
-                  label='Enter Image URL'
-                  type='textarea'
-                  fullWidth
-                  onChange={(e) => {
-                    setImage(e.target.value);
-                  }}
-                />
-              </Box>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloseEdit} color='primary'>
-                Cancel
-              </Button>
-              <Button type='submit' color='primary' onClick={handleUpdate}>
-                Save
-              </Button>
-            </DialogActions>
-      </Dialog>
+            </Box>
+            <Box>
+              <TextField
+                autoFocus
+                name='price'
+                id='category'
+                label='Enter Category Here'
+                type='text'
+                // value={selectedProduct.category}
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                }}
+              />
+            </Box>
+            <Box>
+              <TextField
+                autoFocus
+                id='description'
+                name='description'
+                label='product Description'
+                type='textarea'
+                fullWidth
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+              />
+            </Box>
+            <Box>
+              <TextField
+                autoFocus
+                id='image'
+                name='image'
+                label='Enter Image URL'
+                type='textarea'
+                fullWidth
+                onChange={(e) => {
+                  setImage(e.target.value);
+                }}
+              />
+            </Box>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseEdit} color='primary'>
+              Cancel
+            </Button>
+            <Button type='submit' color='primary' onClick={() => handleUpdate()}>
+              Save
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </form>
       <Dialog open={deleteOpen} onClose={handleCloseDelete}>
         <DialogTitle>Delete Product</DialogTitle>
         <DialogContent>
