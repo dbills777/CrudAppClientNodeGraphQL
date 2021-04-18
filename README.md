@@ -5,6 +5,7 @@
 ## Docker-based PostgreSQL or MySQL as your data store
 
 ## At least 3 Query resolvers allowing users to get data from your server
+```javascript
 query allProducts {
   allProducts{
     id
@@ -15,12 +16,15 @@ query allProducts {
     image
   }
 }
+```
+```javascript
 query allCategories{
   allCategories{
-
     description
   }
 }
+```
+```javascript
 query prodByID{
   productById(id: 2){
     id
@@ -31,9 +35,10 @@ query prodByID{
     image
   }
 }
+```
 
 ## At least 2 Mutation resolvers allowing users to create, update, or upsert an item.
-
+```javascript
     mutation updateProduct{
     updateProduct(id: 1, data: {
       title: "Test update product number 1",
@@ -50,6 +55,8 @@ query prodByID{
       image
     }
   }
+  ```
+  ```javascript
   mutation createProduct{
   createProduct(
     data:{
@@ -68,15 +75,16 @@ query prodByID{
     image
   }
 }
-
+```
 ## At least 1 Mutation resolver allowing users to delete an item.
+```javascript
   mutation deleteProduct{
     deleteProduct(id: 21){
       title
       id
     }
   }
-## Your datastore will contain at least 25 items
+```
 
 ## Your datastore will contain at least 25 items
 - Preloaded with >= 25 items
