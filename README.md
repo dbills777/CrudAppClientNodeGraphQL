@@ -6,6 +6,7 @@
 
 ## At least 3 Query resolvers allowing users to get data from your server
 ```javascript
+// Loads on page Load
 query allProducts {
   allProducts{
     id
@@ -18,6 +19,7 @@ query allProducts {
 }
 ```
 ```javascript
+// Loads on page load and fills select list with categories in db
 query allCategories{
   allCategories{
     description
@@ -25,6 +27,7 @@ query allCategories{
 }
 ```
 ```javascript
+// not implementated in front end
 query prodByID{
   productById(id: 2){
     id
@@ -36,9 +39,22 @@ query prodByID{
   }
 }
 ```
+```javascript
+// not implemented in front end
+query catByID{
+  categoryById(id: 367){
+    id
+    description
+    product{
+      title
+    }
+  }
+}
+```
 
 ## At least 2 Mutation resolvers allowing users to create, update, or upsert an item.
 ```javascript
+// clicking edit and submitting the form updates a products details in db
     mutation updateProduct{
     updateProduct(id: 1, data: {
       title: "Test update product number 1",
@@ -57,6 +73,7 @@ query prodByID{
   }
   ```
   ```javascript
+  // clicking add product button brings up page for adding a new product to db
   mutation createProduct{
   createProduct(
     data:{
@@ -78,6 +95,7 @@ query prodByID{
 ```
 ## At least 1 Mutation resolver allowing users to delete an item.
 ```javascript
+// clicking delete button deletes a product from the db
   mutation deleteProduct{
     deleteProduct(id: 21){
       title
