@@ -49,4 +49,5 @@ type Query {
   allCategories: [Category!]!
   allProducts: [Product!]!
   categoryById(id: Int): Category
+  productById(id: Int): Product
 }

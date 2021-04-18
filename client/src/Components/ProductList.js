@@ -54,7 +54,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const ALL_PRODUCTS = gql`
-  query {
+  query ProductsAndCategories {
     allProducts {
       id
       title
@@ -63,11 +63,29 @@ const ALL_PRODUCTS = gql`
       category
       image
     }
+    allCategories{
+      description
+    }
+
   }
 `;
+
 const UPDATE_PRODUCT = gql`
   mutation updateProduct($id: Int!,$title: String!,$price: String!,$description: String!,$category: String!,$image: String!) {
     updateProduct (id: $id, data: { title: $title, price: $price, description: $description, category: $category, image: $image }
+    ) {
+      id
+    }
+  }
+`;
+const CREATE_CATEGORY = gql`
+  mutation createCategory($id: Int!, $productTitle: String!) {
+    createCategory(
+      id: $id
+      data: {
+        productTitle: $productTitle
+        price: $price
+      }
     ) {
       id
     }
@@ -111,9 +129,9 @@ const ProductList = () => {
   const { loading, error, data } = useQuery(ALL_PRODUCTS);
   const [updateProduct] = useMutation(UPDATE_PRODUCT);
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
+  const [createCategory] = useMutation(CREATE_CATEGORY);
   // const [createProduct] = useMutation(CREATE_PRODUCT);
   // console.log(productList);
-
   const handleDelete = async () => {
     setDeleteOpen(false);
     console.log(selectedProduct.id);
@@ -150,6 +168,12 @@ const ProductList = () => {
         image: image,
       },
     });
+    createCategory({
+      variables: {
+        id: selectedProduct.id,
+        description: category,
+      }
+    })
   };
 
   const handleCloseDelete = () => {
@@ -167,7 +191,17 @@ const ProductList = () => {
     return <Typography className={classes.messages}>{`${error.message}`}</Typography>;
   }
   const productList = data.allProducts;
+  const categoryList = data.allCategories;
 
+const filteredArr = categoryList.reduce((acc, current) => {
+  const x = acc.find((item) => item.description === current.description);
+  if (!x) {
+    return acc.concat([current]);
+  } else {
+    return acc;
+  }
+}, []);
+console.log(filteredArr)
   return (
     <>
       <form>
@@ -176,6 +210,12 @@ const ProductList = () => {
           <SearchIcon />
         </IconButton>
       </form>
+      <label for='categories'>Find By Category:</label>
+      <select name='categories' id='cars'>
+        {filteredArr.map((category) => {
+          return <option value ={category.description}>{category.description}</option>;
+        })}
+      </select>
       <Container className={classes.root}>
         {productList.map((product) => {
           return (

@@ -109,6 +109,7 @@ export interface NexusGenFieldTypes {
     allCategories: NexusGenRootTypes['Category'][]; // [Category!]!
     allProducts: NexusGenRootTypes['Product'][]; // [Product!]!
     categoryById: NexusGenRootTypes['Category'] | null; // Category
+    productById: NexusGenRootTypes['Product'] | null; // Product
   }
 }
 
@@ -139,6 +140,7 @@ export interface NexusGenFieldTypeNames {
     allCategories: 'Category'
     allProducts: 'Product'
     categoryById: 'Category'
+    productById: 'Product'
   }
 }
 
@@ -161,6 +163,9 @@ export interface NexusGenArgTypes {
   }
   Query: {
     categoryById: { // args
+      id?: number | null; // Int
+    }
+    productById: { // args
       id?: number | null; // Int
     }
   }

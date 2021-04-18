@@ -40,6 +40,17 @@ const Query = objectType({
         })
       },
     })
+    t.nullable.field('productById', {
+      type: 'Product',
+      args: {
+        id: intArg(),
+      },
+      resolve: (_parent, args, context) => {
+        return context.prisma.product.findUnique({
+          where: { id: args.id || undefined },
+        })
+      },
+    })
 
     // t.nonNull.list.nonNull.field('feed', {
     //   type: 'Post',
