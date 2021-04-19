@@ -62,7 +62,6 @@ const useStyles = makeStyles(() => ({
   },
 
     fullWidth: {
-      // width: "800px",
       marginLeft: "20rem",
       marginRight: "30rem",
     }
