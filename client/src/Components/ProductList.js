@@ -60,6 +60,13 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'space-between',
     alignItems: 'baseline',
   },
+
+    fullWidth: {
+      // width: "800px",
+      marginLeft: "20rem",
+      marginRight: "30rem",
+    }
+
 }));
 
 const ALL_PRODUCTS = gql`
@@ -235,19 +242,20 @@ const filteredArr = categoryList.reduce((acc, current) => {
 console.log(filteredArr)
   return (
     <>
-      <div>
+      <div className={classes.fullWidth}>
         <IconButton onClick={handleClickOpen} aria-label='add-character'>
           <AddCircleIcon />
           <h1>+Add Product</h1>
         </IconButton>
-      </div>
-      <div>
-        <label for='categories'>Find By Category:</label>
-        <select name='categories' id='cars'>
-          {filteredArr.map((category) => {
-            return <option value={category.description}>{category.description}</option>;
-          })}
-        </select>
+
+        <div>
+          <label for='categories'>Find By Category:</label>
+          <select name='categories' id='cars'>
+            {filteredArr.map((category) => {
+              return <option value={category.description}>{category.description}</option>;
+            })}
+          </select>
+        </div>
       </div>
       <Container className={classes.root}>
         {productList.map((product) => {
