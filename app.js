@@ -26,7 +26,7 @@ app.use('/api', (req, res, next) => {
   );
   next();
 });
-app.use(express.static('public'))
+app.use(express.static('client'))
 app.use('/api', apiRouter);
 app.use('/character', characterRouter);
 app.use('/episode', episodeRouter);
