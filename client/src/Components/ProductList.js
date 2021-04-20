@@ -62,7 +62,6 @@ const useStyles = makeStyles(() => ({
   },
 
     fullWidth: {
-      // width: "800px",
       marginLeft: "20rem",
       marginRight: "30rem",
     }
@@ -192,12 +191,12 @@ const ProductList = () => {
         image: image,
       },
     });
-    createCategory({
-      variables: {
-        id: selectedProduct.id,
-        description: category,
-      }
-    })
+    // createCategory({
+    //   variables: {
+    //     id: selectedProduct.id,
+    //     description: category,
+    //   }
+    // })
   };
   const handleAddProduct = async () => {
     console.log('hit handle update', title, description,price, category, image );
