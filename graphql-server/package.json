@@ -15,7 +15,8 @@
     "migrate": "npx prisma migrate dev --name init",
     "seed:product": "node prisma/seed/seedTestProducts.js",
     "seed": "npx prisma db seed --preview-feature",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "start": "npm run migrate && sleep 5 && npm run seed:product && nodemon src/server.js"
   },
   "devDependencies": {
     "nodemon": "2.0.7",
