@@ -121,8 +121,8 @@ query catByID{
 - Preloaded with >= 25 items
 
 ## Your app will be deployable locally using Docker and will have seed data entered into the datastore.
- - todo deployment
- - datastore loaded
+ - Docker Container Deployed to Heroku
+ - Datastore loaded
 
 ## All of your source code will be properly uploaded to GitHub
 -properly uploaded to GitHub
