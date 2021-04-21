@@ -17,7 +17,6 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
-//tell apiRouter to serve public folder
 
 //tell app to use routes
 app.use('/api', (req, res, next) => {
@@ -26,6 +25,7 @@ app.use('/api', (req, res, next) => {
   );
   next();
 });
+//tell apiRouter to serve public folder
 app.use(express.static('public'))
 app.use('/api', apiRouter);
 app.use('/character', characterRouter);
