@@ -11,7 +11,7 @@
   - PostgreSQL
 
 ## At least 3 Query resolvers allowing users to get data from your server
-1
+1. Get All Products From db
 ```javascript
 // Loads on page Load
 query allProducts {
@@ -25,7 +25,7 @@ query allProducts {
   }
 }
 ```
-2
+2. Get All Categories From db
 ```javascript
 // Loads on page load and fills select list with categories in db
 query allCategories{
@@ -48,7 +48,7 @@ query prodByID{
   }
 }
 ```
-4
+4. Get a Category By ID
 ```javascript
 // not implemented in front end
 query catByID{
@@ -61,7 +61,7 @@ query catByID{
   }
 }
 ```
-Full Query Resolvers
+Full Query Resolvers For Queries Above
 ```javascript
 const Query = objectType({
   name: 'Query',
@@ -104,7 +104,7 @@ const Query = objectType({
 ```
 
 ## At least 2 Mutation resolvers allowing users to create, update, or upsert an item.
-1
+1. To Update Product Details For An Existing Product
 ```javascript
 // clicking edit and submitting the form updates a products details in db
     mutation updateProduct{
@@ -124,7 +124,7 @@ const Query = objectType({
     }
   }
   ```
- 2
+ 2. To Create A New Product
   ```javascript
   // clicking add product button brings up page for adding a new product to db
   // Currently Working Out an issue where a new category is not being generated when new product is added that has a category not already listed in the db.
@@ -223,7 +223,7 @@ const Mutation = objectType({
 ```
 
 ## At least 1 Mutation resolver allowing users to delete an item.
-1
+1. To Delete An Existing Item
 ```javascript
 // clicking delete button deletes a product from the db
   mutation deleteProduct{
@@ -252,12 +252,13 @@ Full Delete Resolver
 - Preloaded with >= 25 items
 
 ## Your app will be deployable locally using Docker and will have seed data entered into the datastore.
+ - Deployable locally using Docker & Docker Compose
  - Docker Container Deployed to Heroku
  - Datastore loaded
 
 ## All of your source code will be properly uploaded to GitHub
--properly uploaded to GitHub
+- properly uploaded to GitHub
 
 ## Your ReadMe file will accurately describe your server install and run process and how to use the APIs
-
+Due To .env reliance, Full Docker Container is hosted and available via heroku.
 
