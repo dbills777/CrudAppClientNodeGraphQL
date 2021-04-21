@@ -36,7 +36,7 @@ query allCategories{
 ```
 3
 ```javascript
-// not implementated in front end
+// Serching For a use case to implement in FrontEnd
 query prodByID{
   productById(id: 2){
     id
@@ -127,13 +127,14 @@ const Query = objectType({
  2
   ```javascript
   // clicking add product button brings up page for adding a new product to db
+  // Currently Working Out an issue where a new category is not being generated when new product is added that has a category not already listed in the db.
   mutation createProduct{
   createProduct(
     data:{
-    title: "First Product Addition",
+    title: "Hat",
     price: "299",
     description: "this is the description for the first product added to the db",
-    category: "Vacation",
+    category: "Hats",
     image: "https://via.placeholder.com/300.png/09f/fff"}
 
   ){
