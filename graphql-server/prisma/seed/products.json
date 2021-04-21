@@ -169,7 +169,7 @@
   },
   {
     "id": 22,
-    "title": "Air Max ",
+    "title": "VaporMax Women's ",
     "price": "197.95",
     "description": "The Nike Air VaporMax Plus looks to the past and propels you into the future. A color update refreshes this icon as it nods to the '98 Air Max Plus with its floating cage, padded upper and heel logo, and revolutionary VaporMax Air technology to ramp up the comfort.",
     "category": "womens shoes",
@@ -177,26 +177,26 @@
   },
   {
     "id": 23,
-    "title": "Air Max ",
-    "price": "197.95",
+    "title": "Nike React Miler 2 ",
+    "price": "130.95",
     "description": "The Nike Air VaporMax Plus looks to the past and propels you into the future. A color update refreshes this icon as it nods to the '98 Air Max Plus with its floating cage, padded upper and heel logo, and revolutionary VaporMax Air technology to ramp up the comfort.",
-    "category": "womens shoes",
-    "image": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/a6fdb9d5-c81a-4d4b-9451-328f931b07dd/air-vapormax-plus-womens-shoe-xbt7zf.jpg"
+    "category": "mens shoes",
+    "image": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/a176513c-2a44-401e-9b5c-1da45364dcc9/react-miler-2-mens-running-shoe-3PDZdP.png"
   },
   {
     "id": 24,
-    "title": "Air Max ",
-    "price": "197.95",
+    "title": "Air VaporMax  ",
+    "price": "199.95",
     "description": "The Nike Air VaporMax Plus looks to the past and propels you into the future. A color update refreshes this icon as it nods to the '98 Air Max Plus with its floating cage, padded upper and heel logo, and revolutionary VaporMax Air technology to ramp up the comfort.",
-    "category": "womens shoes",
-    "image": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/a6fdb9d5-c81a-4d4b-9451-328f931b07dd/air-vapormax-plus-womens-shoe-xbt7zf.jpg"
+    "category": "mens shoes",
+    "image": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/7f8fd80c-7ef3-4577-9fd8-975798ef2a8f/air-vapormax-2020-flyknit-mens-shoe-kn9vwZ.png"
   },
   {
     "id": 25,
-    "title": "Air Max ",
-    "price": "197.95",
-    "description": "The Nike Air VaporMax Plus looks to the past and propels you into the future. A color update refreshes this icon as it nods to the '98 Air Max Plus with its floating cage, padded upper and heel logo, and revolutionary VaporMax Air technology to ramp up the comfort.",
-    "category": "womens shoes",
-    "image": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/a6fdb9d5-c81a-4d4b-9451-328f931b07dd/air-vapormax-plus-womens-shoe-xbt7zf.jpg"
+    "title": "Air VaporMax ",
+    "price": "164.97",
+    "description": "Designed with sustainability in mind, the Nike Air VaporMax 2020 Flyknit is made from at least 50% recycled content by weight. That’s a lot of trash! As part of Nike’s journey towards lowering our impact, we’re discovering new ways to put our waste to good use. By utilizing leftover materials, recycled polyester, recycled foam, and a Nike Air sole made from at least 75% recycled TPU, the VaporMax 2020 Flyknit marks the next step towards our ultimate goal of zero carbon and zero waste.",
+    "category": "mens shoes",
+    "image": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/1d6a319a-eb6a-4619-8957-4e0f6b16788e/air-vapormax-2020-fk-mens-shoe-kn9vwZ.png"
   }
 ]

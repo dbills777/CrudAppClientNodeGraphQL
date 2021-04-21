@@ -61,11 +61,10 @@ const useStyles = makeStyles(() => ({
     alignItems: 'baseline',
   },
 
-    fullWidth: {
-      marginLeft: "20rem",
-      marginRight: "30rem",
-    }
-
+  fullWidth: {
+    marginLeft: '20rem',
+    marginRight: '30rem',
+  },
 }));
 
 const ALL_PRODUCTS = gql`
@@ -78,42 +77,38 @@ const ALL_PRODUCTS = gql`
       category
       image
     }
-    allCategories{
+    allCategories {
       description
     }
-
   }
 `;
 
 const UPDATE_PRODUCT = gql`
-  mutation updateProduct($id: Int!,$title: String!,$price: String!,$description: String!,$category: String!,$image: String!) {
-    updateProduct (id: $id, data: { title: $title, price: $price, description: $description, category: $category, image: $image }
-    ) {
-      id
-    }
-  }
-`;
-const CREATE_CATEGORY = gql`
-  mutation createCategory($id: Int!, $productTitle: String!) {
-    createCategory(
-      id: $id
-      data: {
-        productTitle: $productTitle
-        price: $price
-      }
-    ) {
-      id
-    }
-  }
-`;
-const CREATE_PRODUCT = gql`
-  mutation createProduct(
+  mutation updateProduct(
+    $id: Int!
     $title: String!
     $price: String!
     $description: String!
     $category: String!
     $image: String!
   ) {
+    updateProduct(
+      id: $id
+      data: { title: $title, price: $price, description: $description, category: $category, image: $image }
+    ) {
+      id
+    }
+  }
+`;
+// const CREATE_CATEGORY = gql`
+//   mutation createCategory($id: Int!, $productTitle: String!) {
+//     createCategory(id: $id, data: { productTitle: $productTitle, price: $price }) {
+//       id
+//     }
+//   }
+// `;
+const CREATE_PRODUCT = gql`
+  mutation createProduct($title: String!, $price: String!, $description: String!, $category: String!, $image: String!) {
     createProduct(
       data: { title: $title, price: $price, description: $description, category: $category, image: $image }
     ) {
@@ -143,7 +138,7 @@ const ProductList = () => {
   const { loading, error, data } = useQuery(ALL_PRODUCTS);
   const [updateProduct] = useMutation(UPDATE_PRODUCT);
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
-  const [createCategory] = useMutation(CREATE_CATEGORY);
+  // const [createCategory] = useMutation(CREATE_CATEGORY);
   const [createProduct] = useMutation(CREATE_PRODUCT);
   // const [createProduct] = useMutation(CREATE_PRODUCT);
   // console.log(productList);
@@ -156,9 +151,9 @@ const ProductList = () => {
       console.error(err);
     }
   };
- const handleClickOpen = () => {
-   setOpen(true);
- };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
   const handleClickEditOpen = (product) => {
     console.log(product);
     setSelectedProduct(product.product);
@@ -169,16 +164,16 @@ const ProductList = () => {
     setDeleteOpen(true);
   };
   // Add a new Product section
-   const handleClose = async () => {
-     setOpen(false);
-   };
+  const handleClose = async () => {
+    setOpen(false);
+  };
 
-    //  end Add a new Product Section.
+  //  end Add a new Product Section.
   const handleCloseEdit = () => {
     setEditOpen(false);
   };
   const handleUpdate = async () => {
-    console.log('hit handle update', title, description,price, category, image );
+    console.log('hit handle update', title, description, price, category, image);
     setEditOpen(false);
 
     updateProduct({
@@ -199,7 +194,7 @@ const ProductList = () => {
     // })
   };
   const handleAddProduct = async () => {
-    console.log('hit handle update', title, description,price, category, image );
+    console.log('hit handle update', title, description, price, category, image);
     setOpen(false);
     createProduct({
       variables: {
@@ -210,7 +205,6 @@ const ProductList = () => {
         image: image,
       },
     });
-
   };
 
   const handleCloseDelete = () => {
@@ -230,15 +224,15 @@ const ProductList = () => {
   const productList = data.allProducts;
   const categoryList = data.allCategories;
 
-const filteredArr = categoryList.reduce((acc, current) => {
-  const x = acc.find((item) => item.description === current.description);
-  if (!x) {
-    return acc.concat([current]);
-  } else {
-    return acc;
-  }
-}, []);
-console.log(filteredArr)
+  const filteredArr = categoryList.reduce((acc, current) => {
+    const x = acc.find((item) => item.description === current.description);
+    if (!x) {
+      return acc.concat([current]);
+    } else {
+      return acc;
+    }
+  }, []);
+  console.log(filteredArr);
   return (
     <>
       <div className={classes.fullWidth}>
@@ -249,7 +243,8 @@ console.log(filteredArr)
 
         <div>
           <label for='categories'>Find By Category:</label>
-          <select name='categories' id='cars'>
+          <select name='categories' id='categories'>
+            <option value="all-categories">All Categories</option>
             {filteredArr.map((category) => {
               return <option value={category.description}>{category.description}</option>;
             })}
