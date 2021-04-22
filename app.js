@@ -27,7 +27,7 @@ app.use('/api', (req, res, next) => {
   next();
 });
 app.use(express.static('client/build'))
-app.use('graphql', graphHTTP({
+app.use('/graphql', graphHTTP({
   schema,
   graphiql: true
 }))
