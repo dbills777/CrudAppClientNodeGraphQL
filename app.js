@@ -27,6 +27,11 @@ app.use('/api', (req, res, next) => {
   next();
 });
 app.use(express.static('client/build'))
+app.use('graphql', graphHTTP({
+  schema,
+  graphiql: true
+}))
+
 app.use('/api', apiRouter);
 app.use('/character', characterRouter);
 app.use('/episode', episodeRouter);
