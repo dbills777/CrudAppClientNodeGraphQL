@@ -1,6 +1,15 @@
 # GraphQL API Node Server
 [ProductList.js](https://github.com/dbills777/CrudAppClientNodeGraphQL/blob/main/client/src/Components/ProductList.js)
 
+## Your ReadMe file will accurately describe your server install and run process and how to use the APIs
+   1. Place .env (file one in root directory)
+   2. Place .env (file two in graphql/prisma directory)
+   3. npm install from root dir
+   4. npm run launch from root dir
+   5. npm run migrate from root dir
+   6. npm run seed:product from root dir
+   7. npm run start-dev from root dir
+
 ## Prisma as your data modeling tool
 [Prisma Folder-> migrations: seed: shchema: ](https://github.com/dbills777/CrudAppClientNodeGraphQL/blob/main/client/src/Components/ProductList.js)
 <br>
@@ -259,6 +268,4 @@ Full Delete Resolver
 ## All of your source code will be properly uploaded to GitHub
 - properly uploaded to GitHub
 
-## Your ReadMe file will accurately describe your server install and run process and how to use the APIs
-Due To .env reliance, Full Docker Container is hosted and available via heroku.
 
