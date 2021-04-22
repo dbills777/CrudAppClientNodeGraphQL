@@ -2,7 +2,7 @@
 [ProductList.js](https://github.com/dbills777/CrudAppClientNodeGraphQL/blob/main/client/src/Components/ProductList.js)
 
 ## Your ReadMe file will accurately describe your server install and run process and how to use the APIs
-   1. Place .env (file one in root directory)
+   1. Place .env (file one in root directory).
    2. Place .env (file two in graphql/prisma directory)
    3. npm install from root dir
    4. npm run launch from root dir
