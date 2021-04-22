@@ -14,7 +14,7 @@ const errorLink = onError(({ graphqlErrors, networkError }) => {
     });
   }
 });
-const link = from([errorLink, new HttpLink({ uri: 'https://dockerapp-stage.herokuapp.com/' })]);
+const link = from([errorLink, new HttpLink({ uri: 'https://dockerapp-stage.herokuapp.com/graphql' })]);
 
 const client = new ApolloClient({
   link: link,
