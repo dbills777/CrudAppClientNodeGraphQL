@@ -167,6 +167,7 @@ const ListCard = () => {
 
   useEffect(() => {
     getCharacters();
+    // eslint-disable-next-line
   }, []);
 
   const handleClickDeleteOpen = async (item) => {
@@ -377,7 +378,7 @@ const ListCard = () => {
                 <CloseIcon />
               </IconButton>
               <Typography variant='h6' className={classes.title2}>
-                Add A New Character
+                Add A New Character to Database
               </Typography>
               <Button autoFocus color='inherit' onClick={handleClose}>
                 save
@@ -417,6 +418,30 @@ const ListCard = () => {
                 margin='dense'
                 id='portrayed'
                 label='Portrayed By: '
+                type='Text'
+                fullWidth
+                onChange={updateField}
+              />
+            </ListItem>
+            <ListItem button>
+              <TextField
+                required
+                autoComplete='off'
+                margin='dense'
+                id='image'
+                label='image: '
+                type='Text'
+                fullWidth
+                onChange={updateField}
+              />
+            </ListItem>
+            <ListItem button>
+              <TextField
+                required
+                autoComplete='off'
+                margin='dense'
+                id='portrayed'
+                label='Occupation By: '
                 type='Text'
                 fullWidth
                 onChange={updateField}
