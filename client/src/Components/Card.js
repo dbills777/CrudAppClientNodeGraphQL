@@ -117,7 +117,7 @@ const ListCard = () => {
   const [newNickName, setNewNickName] = useState(null);
   const [searchTerm, setSearchTerm] = useState(null);
   const [open, setOpen] = React.useState(false);
-  const [postData, setPostData] = useState({ image: '', nickname: '', name: '' });
+  const [postData, setPostData] = useState({ image: '', nickname: '', name: '', occupation: '' });
   const url = `https://immense-island-84831.herokuapp.com/character`;
   const handleClickOpen = () => {
     setOpen(true);
@@ -126,8 +126,8 @@ const ListCard = () => {
     setPostData({
       ...postData,
       [e.target.id]: e.target.value,
-      occupation: ['Actor'],
-      image: 'https://picsum.photos/200/300',
+      // occupation: ['Actor'],
+      // image: 'https://picsum.photos/200/300',
       status: 'Alive',
       char_id: 0,
     });
