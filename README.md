@@ -1,4 +1,10 @@
 # Final Project
+## REST TABS:
+  - Characters, Quotes, Episodes Table,
+  - all interactivity from these files uses the hosted REST Server to handle Requests.
+## GraphQL TABS:
+  - Products
+  - all interactivity from this file uses GraphQL Queries and Mutations.
 
 ## To Run Locally
 1.  Place .env (file one in root directory).
