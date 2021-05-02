@@ -117,7 +117,7 @@ const ListCard = () => {
   const [newNickName, setNewNickName] = useState(null);
   const [searchTerm, setSearchTerm] = useState(null);
   const [open, setOpen] = React.useState(false);
-  const [postData, setPostData] = useState({ image: '', nickname: '', name: '', occupation: '' });
+  const [postData, setPostData] = useState({ image: '', nickname: '', name: '', occupation: '', portrayed: '' });
   const url = `https://immense-island-84831.herokuapp.com/character`;
   const handleClickOpen = () => {
     setOpen(true);
@@ -440,7 +440,7 @@ const ListCard = () => {
                 required
                 autoComplete='off'
                 margin='dense'
-                id='portrayed'
+                id='occupation'
                 label='Occupation By: '
                 type='Text'
                 fullWidth
