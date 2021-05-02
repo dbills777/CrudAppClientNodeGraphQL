@@ -39,12 +39,10 @@ export default function Quote() {
 
   return quotes.map((item) => {
     const author = item.author;
-
     const image = items.characters.filter((person) => {
       return person.name === author || person.nickname === author;
     });
     const photo = image.map((person) => person.image);
-
     return (
       <div className='quoteDiv' key={item.quote_id} style={style}>
         <button className='btn' onClick={getNewQuote}>
@@ -58,7 +56,6 @@ export default function Quote() {
             </h3>
           </em>
         </div>
-
         <p className='flex'>
           {image.length ? (
             <>

@@ -255,9 +255,6 @@ const ListCard = () => {
             handleSeach();
           }}
         />
-        {/* <IconButton onClick={() => handleSeach()} aria-label='search'>
-          <SearchIcon />
-        </IconButton> */}
         <IconButton onClick={handleClickOpen} aria-label='add-character'>
           <AddCircleIcon />
         </IconButton>
