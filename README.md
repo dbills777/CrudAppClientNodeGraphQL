@@ -1,7 +1,6 @@
 # Final Project
 
 ## To Run Locally
-
 1.  Place .env (file one in root directory).
 2.  Place .env (file two in graphql/prisma directory)
 3.  npm install from root dir
@@ -10,7 +9,6 @@
 6.  npm run seed:product from root dir
 7.  npm run start-dev from root dir
 
-- docker-compose up can be used after step 3.
 
 # 1. Effectively use conditional logic, JavaScript array methods, and front-end framework elements to render large lists on the web client.
 
@@ -299,5 +297,7 @@ query catByID{
 # 8. You will submit the GitHub URL for your project with a detailed ReadMe explaining how to install and run your server(s) on Docker or from your deployed sites.
 
 NodeJS server and Client are hosted via a container deployed to Heroku. GraphQL server is not hosted and needs to be run locally. (following instructions at top of page)
+
+Currentyly the Client and REST portions are hosted to Heroku and functioning properly. The GraphQL Must run locally via the instructions.
 
 
