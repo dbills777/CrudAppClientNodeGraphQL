@@ -85,7 +85,7 @@ query catByID{
   ```
  2
   ```javascript
-  // clicking add product button brings up page for adding a new product to db
+  // clicking add product button brings up page for adding a  product to db
   mutation createProduct{
   createProduct(
     data:{
